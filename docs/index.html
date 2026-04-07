@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OpenClaude Mobile — Claude Code on Android</title>
+<meta name="description" content="OpenClaude — the open-source Claude Code agent — running natively on Android. Full Linux, 19 tools, MCP, multi-agent swarms. No server. No PC." />
+<meta property="og:title" content="OpenClaude Mobile — Claude Code on Android" />
+<meta property="og:description" content="The open-source Claude Code agent running on your phone. Full Linux environment, 19 tools, provider-agnostic. No server needed." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://friuns2.github.io/openclaude-android/" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #07090e;
+    --surface: #0d1117;
+    --surface-raised: #131920;
+    --border: #1b2332;
+    --border-glow: #1a2540;
+    --text: #e0e6ee;
+    --text-dim: #7d8a9d;
+    --accent: #d97706;
+    --accent-soft: #b45f04;
+    --teal: #0ea5e9;
+    --teal-deep: #0369a1;
+    --cream: #f0e8d8;
+    --mono: 'DM Mono', 'SF Mono', monospace;
+    --display: 'Instrument Serif', Georgia, serif;
+    --body: 'Syne', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration: none; transition: color .2s; }
+  a:hover { color: var(--cream); }
+
+  .grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: .03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 1.5rem;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140%;
+    height: 80%;
+    background: radial-gradient(ellipse at center, rgba(217, 119, 6, .06) 0%, rgba(14, 165, 233, .04) 40%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border-glow) 30%, var(--accent-soft) 50%, var(--border-glow) 70%, transparent 100%);
+  }
+
+  .hero-icon {
+    font-size: clamp(4rem, 12vw, 8rem);
+    line-height: 1;
+    margin-bottom: 1rem;
+    animation: float 6s ease-in-out infinite;
+    filter: drop-shadow(0 0 40px rgba(217, 119, 6, .15));
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(3rem, 10vw, 6.5rem);
+    font-weight: 400;
+    letter-spacing: -.03em;
+    line-height: .9;
+    color: var(--cream);
+    margin-bottom: .75rem;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--accent); }
+
+  .hero-sub {
+    font-family: var(--mono);
+    font-size: clamp(.72rem, 1.4vw, .88rem);
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-desc {
+    max-width: 580px;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: var(--text-dim);
+    margin-bottom: 3rem;
+    line-height: 1.75;
+  }
+
+  .hero-desc strong { color: var(--text); font-weight: 600; }
+
+  .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .85rem 2rem;
+    border-radius: 4px;
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: .95rem;
+    letter-spacing: .02em;
+    transition: all .25s ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #080808;
+  }
+  .btn-primary:hover {
+    background: var(--cream);
+    color: #080808;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(217, 119, 6, .25);
+  }
+
+  .btn-teal {
+    background: var(--teal);
+    color: #080808;
+  }
+  .btn-teal:hover {
+    background: #38bdf8;
+    color: #080808;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(14, 165, 233, .25);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover {
+    border-color: var(--accent-soft);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 6rem 1.5rem;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .25em;
+    color: var(--accent-soft);
+    margin-bottom: .75rem;
+  }
+
+  .section h2 {
+    font-family: var(--display);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+  }
+
+  .section h2 em { font-style: italic; color: var(--accent); }
+
+  .section-intro {
+    max-width: 640px;
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin-bottom: 3rem;
+  }
+
+  .feat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .feat {
+    background: var(--surface);
+    padding: 2rem;
+    transition: background .3s;
+  }
+
+  .feat:hover { background: var(--surface-raised); }
+
+  .feat-icon { font-size: 1.6rem; margin-bottom: .75rem; display: block; }
+
+  .feat h3 {
+    font-family: var(--body);
+    font-size: .95rem;
+    font-weight: 700;
+    margin-bottom: .5rem;
+    color: var(--cream);
+  }
+
+  .feat p {
+    font-size: .85rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .arch-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .arch-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+
+  .arch-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .arch-dot:nth-child(1) { background: #ef4444; }
+  .arch-dot:nth-child(2) { background: var(--accent); }
+  .arch-dot:nth-child(3) { background: #22c55e; }
+
+  .arch-body { padding: 1.5rem; overflow-x: auto; }
+
+  .arch-body pre {
+    font-family: var(--mono);
+    font-size: .78rem;
+    line-height: 1.7;
+    color: var(--accent-soft);
+    white-space: pre;
+    margin: 0;
+  }
+
+  .arch-body .hl { color: var(--accent); }
+  .arch-body .dim { color: var(--text-dim); }
+  .arch-body .grn { color: #22c55e; }
+  .arch-body .tl { color: var(--teal); }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    counter-reset: step;
+  }
+
+  .step {
+    background: var(--surface);
+    padding: 2rem;
+    counter-increment: step;
+    position: relative;
+    transition: background .3s;
+  }
+
+  .step:hover { background: var(--surface-raised); }
+
+  .step::before {
+    content: counter(step, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: .7rem;
+    color: var(--accent-soft);
+    letter-spacing: .1em;
+    display: block;
+    margin-bottom: .75rem;
+  }
+
+  .step h3 { font-size: .95rem; font-weight: 700; margin-bottom: .4rem; color: var(--cream); }
+  .step p { font-size: .85rem; color: var(--text-dim); line-height: 1.6; }
+
+  .code-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .code-tab {
+    padding: .75rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: .75rem;
+    color: var(--text-dim);
+    letter-spacing: .05em;
+  }
+
+  .code-body { padding: 1.5rem; overflow-x: auto; }
+
+  .code-body code {
+    font-family: var(--mono);
+    font-size: .82rem;
+    line-height: 1.8;
+    color: #22c55e;
+    white-space: pre;
+  }
+  .code-body .cmt { color: var(--text-dim); }
+
+  .stack-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .stack-table th,
+  .stack-table td {
+    padding: .85rem 1.25rem;
+    text-align: left;
+    font-size: .88rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stack-table th {
+    background: var(--surface);
+    font-family: var(--mono);
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    color: var(--text-dim);
+    font-weight: 500;
+  }
+
+  .stack-table td { background: var(--surface); }
+  .stack-table tr:hover td { background: var(--surface-raised); }
+  .stack-table td:first-child { font-weight: 600; color: var(--cream); }
+
+  .provider-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .provider {
+    background: var(--surface);
+    padding: 1.25rem;
+    text-align: center;
+    transition: background .3s;
+  }
+
+  .provider:hover { background: var(--surface-raised); }
+  .provider-icon { font-size: 1.8rem; display: block; margin-bottom: .5rem; }
+  .provider-name { font-size: .85rem; font-weight: 600; color: var(--cream); }
+  .provider-note { font-size: .72rem; color: var(--text-dim); margin-top: .25rem; }
+
+  .release-body h3 {
+    font-family: var(--body);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 1.5rem 0 .5rem;
+  }
+
+  .release-body ul { list-style: none; padding: 0; }
+
+  .release-body li {
+    position: relative;
+    padding-left: 1.2em;
+    margin-bottom: .4rem;
+  }
+
+  .release-body li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent-soft);
+    font-weight: 700;
+  }
+
+  .divider {
+    max-width: 1000px;
+    margin: 0 auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border) 20%, var(--border-glow) 50%, var(--border) 80%, transparent 100%);
+  }
+
+  footer {
+    text-align: center;
+    padding: 5rem 1.5rem 4rem;
+    color: var(--text-dim);
+    font-size: .9rem;
+  }
+
+  footer .tagline {
+    font-family: var(--display);
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--accent-soft);
+    margin-bottom: .75rem;
+  }
+
+  footer .sub { font-family: var(--mono); font-size: .75rem; letter-spacing: .1em; }
+
+  footer .links {
+    margin-top: 2rem;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  footer .links a {
+    font-family: var(--mono);
+    font-size: .8rem;
+    color: var(--text-dim);
+    letter-spacing: .05em;
+    transition: color .2s;
+  }
+  footer .links a:hover { color: var(--accent); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in { opacity: 0; animation: fadeUp .7s ease forwards; }
+  .d1 { animation-delay: .1s; }
+  .d2 { animation-delay: .2s; }
+  .d3 { animation-delay: .35s; }
+  .d4 { animation-delay: .5s; }
+  .d5 { animation-delay: .65s; }
+
+  @media (max-width: 768px) {
+    .feat-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .provider-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero { min-height: auto; padding: 6rem 1rem 4rem; }
+    .section { padding: 4rem 1rem; }
+  }
+
+  @media (max-width: 480px) {
+    .cta-group { flex-direction: column; align-items: stretch; }
+    .btn { justify-content: center; }
+    .provider-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<div class="hero">
+  <div class="hero-icon fade-in d1">🧠</div>
+  <h1 class="fade-in d2">Open<em>Claude</em></h1>
+  <p class="hero-sub fade-in d3">Claude Code &middot; On Android &middot; No Server</p>
+  <p class="hero-desc fade-in d4">
+    The <strong>open-source Claude Code agent</strong> running natively on your
+    Android phone. Full Linux environment, <strong>19 tools</strong>, multi-agent swarms,
+    MCP integration &mdash; provider-agnostic. <strong>No root. No server. No PC.</strong>
+  </p>
+  <div class="cta-group fade-in d5">
+    <a href="https://github.com/friuns2/openclaude-android/releases/latest/download/app-prod-release.apk" class="btn btn-primary">Download APK</a>
+    <a href="https://play.google.com/store/apps/details?id=gptos.intelligence.assistant&hl=en" class="btn btn-teal">Google Play</a>
+    <a href="https://github.com/friuns2/openclaude-android" class="btn btn-ghost">GitHub</a>
+    <a href="https://claw-code.codes" class="btn btn-ghost">Claw Code Docs</a>
+  </div>
+</div>
+
+<!-- ═══════════════ SCREENSHOTS ═══════════════ -->
+<div class="section" style="text-align:center">
+  <p class="section-label">In action</p>
+  <h2>Claude Code, <em>on a phone</em></h2>
+  <div style="display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:2rem">
+    <img src="https://raw.githubusercontent.com/friuns2/openclaw-android-assistant/main/screenshots/screenshot.png" alt="OpenClaude Agent" style="width:260px;border-radius:12px;border:1px solid var(--border);box-shadow:0 8px 40px rgba(0,0,0,.5)" />
+    <img src="https://raw.githubusercontent.com/friuns2/openclaw-android-assistant/main/screenshots/screenshot2.png" alt="Multi-Thread Sessions" style="width:260px;border-radius:12px;border:1px solid var(--border);box-shadow:0 8px 40px rgba(0,0,0,.5)" />
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ STORY ═══════════════ -->
+<div class="section">
+  <p class="section-label">Origin</p>
+  <h2>They leaked <em>Claude Code</em></h2>
+  <p class="section-intro">
+    In March 2026, Anthropic accidentally published 512K lines of Claude Code source via
+    an npm source map. The community rebuilt it as <a href="https://github.com/instructkr/claw-code">Claw Code</a>
+    (48K+ &starf;), then forked it as <a href="https://github.com/Gitlawb/openclaude">OpenClaude</a>
+    with multi-provider support. <strong>We put it on Android.</strong>
+  </p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ FEATURES ═══════════════ -->
+<div class="section">
+  <p class="section-label">Capabilities</p>
+  <h2>Full agent, <em>your pocket</em></h2>
+  <p class="section-intro">
+    OpenClaude Mobile brings the complete Claude Code agent architecture to Android &mdash;
+    19 built-in tools, multi-agent swarms, MCP integration, and support for 10+ LLM providers.
+    All running in an embedded Linux environment.
+  </p>
+
+  <div class="feat-grid">
+    <div class="feat">
+      <span class="feat-icon">🧠</span>
+      <h3>Claude Code Agent</h3>
+      <p>Full OpenClaude agent &mdash; 19 tools, query engine, session memory, transcript compaction. The real thing.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">🔧</span>
+      <h3>19 Built-in Tools</h3>
+      <p>File I/O, bash execution, grep, glob, Git operations, web search, notebook editing &mdash; all permission-gated.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">👥</span>
+      <h3>Multi-Agent Swarms</h3>
+      <p>Spawn sub-agents for parallel tasks. Decompose complex work into independently executable subtasks.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">🔌</span>
+      <h3>MCP Integration</h3>
+      <p>Model Context Protocol with 6 transport types &mdash; Stdio, SSE, HTTP, WebSocket, SDK, ClaudeAiProxy.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">🔮</span>
+      <h3>Provider Agnostic</h3>
+      <p>Claude, OpenAI, Gemini, Ollama, DeepSeek, OpenRouter, GitHub Models &mdash; not locked to any vendor.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">🐧</span>
+      <h3>Embedded Linux</h3>
+      <p>Complete Termux-derived userland &mdash; sh, apt, Bun, Node.js, Python, SSL certs. Extracted from APK.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ PROVIDERS ═══════════════ -->
+<div class="section">
+  <p class="section-label">Any model</p>
+  <h2>Pick your <em>provider</em></h2>
+  <p class="section-intro">
+    OpenClaude is provider-agnostic. Use the <code style="color:var(--accent);font-family:var(--mono);font-size:.85rem">/provider</code>
+    command or environment variables to switch models on the fly.
+  </p>
+
+  <div class="provider-grid">
+    <div class="provider">
+      <span class="provider-icon">🤖</span>
+      <div class="provider-name">OpenAI</div>
+      <div class="provider-note">GPT-4o, o3, GPT-4.5</div>
+    </div>
+    <div class="provider">
+      <span class="provider-icon">🧠</span>
+      <div class="provider-name">Claude</div>
+      <div class="provider-note">Opus, Sonnet, Haiku</div>
+    </div>
+    <div class="provider">
+      <span class="provider-icon">💎</span>
+      <div class="provider-name">Gemini</div>
+      <div class="provider-note">API key or ADC</div>
+    </div>
+    <div class="provider">
+      <span class="provider-icon">🦙</span>
+      <div class="provider-name">Ollama</div>
+      <div class="provider-note">Local, no API key</div>
+    </div>
+    <div class="provider">
+      <span class="provider-icon">🌐</span>
+      <div class="provider-name">OpenRouter</div>
+      <div class="provider-note">100+ models</div>
+    </div>
+    <div class="provider">
+      <span class="provider-icon">🐋</span>
+      <div class="provider-name">DeepSeek</div>
+      <div class="provider-note">V3, Coder</div>
+    </div>
+    <div class="provider">
+      <span class="provider-icon">🐙</span>
+      <div class="provider-name">GitHub Models</div>
+      <div class="provider-note">Interactive onboarding</div>
+    </div>
+    <div class="provider">
+      <span class="provider-icon">☁️</span>
+      <div class="provider-name">Bedrock / Vertex</div>
+      <div class="provider-note">AWS / GCP</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ ARCHITECTURE ═══════════════ -->
+<div class="section">
+  <p class="section-label">Under the hood</p>
+  <h2>Agent architecture, <em>on device</em></h2>
+
+  <div class="arch-wrap">
+    <div class="arch-header">
+      <span class="arch-dot"></span>
+      <span class="arch-dot"></span>
+      <span class="arch-dot"></span>
+    </div>
+    <div class="arch-body">
+<pre>
+<span class="dim">┌────────────────────────────────────────────────────────┐</span>
+<span class="dim">│</span>                 <span class="hl">Android Device</span>                          <span class="dim">│</span>
+<span class="dim">│</span>                                                        <span class="dim">│</span>
+<span class="dim">│</span>  <span class="dim">┌──────────────────────────────────────────────────┐</span>  <span class="dim">│</span>
+<span class="dim">│</span>  <span class="dim">│</span>           <span class="hl">OpenClaude Agent</span>                       <span class="dim">│</span>  <span class="dim">│</span>
+<span class="dim">│</span>  <span class="dim">│</span>                                                  <span class="dim">│</span>  <span class="dim">│</span>
+<span class="dim">│</span>  <span class="dim">│</span>  <span class="grn">Query Engine</span>  → LLM API (streaming, caching)   <span class="dim">│</span>  <span class="dim">│</span>
+<span class="dim">│</span>  <span class="dim">│</span>  <span class="grn">Tool System</span>   → 19 built-in tools               <span class="dim">│</span>  <span class="dim">│</span>
+<span class="dim">│</span>  <span class="dim">│</span>  <span class="tl">MCP Client</span>    → 6 transport types               <span class="dim">│</span>  <span class="dim">│</span>
+<span class="dim">│</span>  <span class="dim">│</span>  <span class="tl">Agent Swarms</span>  → parallel sub-agents             <span class="dim">│</span>  <span class="dim">│</span>
+<span class="dim">│</span>  <span class="dim">│</span>  <span class="hl">Session Mgr</span>   → persistence, compaction         <span class="dim">│</span>  <span class="dim">│</span>
+<span class="dim">│</span>  <span class="dim">└──────────────────────────────────────────────────┘</span>  <span class="dim">│</span>
+<span class="dim">│</span>                                                        <span class="dim">│</span>
+<span class="dim">│</span>  <span class="hl">Rust Core</span>    → 6 crates, 16 runtime modules        <span class="dim">│</span>
+<span class="dim">│</span>  <span class="grn">Bun / Node</span>   → runtime + dependencies               <span class="dim">│</span>
+<span class="dim">│</span>  <span class="grn">Python 3.10</span>  → agent orchestration                   <span class="dim">│</span>
+<span class="dim">│</span>  <span class="dim">Git, rg, fd</span>  → dev toolchain                         <span class="dim">│</span>
+<span class="dim">└────────────────────────────────────────────────────────┘</span>
+</pre>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ STARTUP ═══════════════ -->
+<div class="section">
+  <p class="section-label">Boot sequence</p>
+  <h2>From cold start to <em>ready</em></h2>
+
+  <div class="steps">
+    <div class="step">
+      <h3>Battery &amp; Service</h3>
+      <p>Request Doze exemption. Start foreground service with persistent notification.</p>
+    </div>
+    <div class="step">
+      <h3>Bootstrap Extraction</h3>
+      <p>Extract Termux bootstrap into app&rsquo;s private storage. Fix hardcoded paths.</p>
+    </div>
+    <div class="step">
+      <h3>Runtime Setup</h3>
+      <p>Install Bun, Node.js, Python, ripgrep, and build dependencies via proot Ubuntu.</p>
+    </div>
+    <div class="step">
+      <h3>OpenClaude Install</h3>
+      <p>Install OpenClaude globally. Build Rust core. Configure tool permissions.</p>
+    </div>
+    <div class="step">
+      <h3>Provider Auth</h3>
+      <p>Run <code style="color:var(--accent);font-family:var(--mono);font-size:.8rem">/provider</code> for guided setup or set env vars for your LLM.</p>
+    </div>
+    <div class="step">
+      <h3>Agent Ready</h3>
+      <p>Full agent loop active. 19 tools loaded. MCP connected. Start coding from your phone.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ QUICK START ═══════════════ -->
+<div class="section">
+  <p class="section-label">Get started</p>
+  <h2>Install &amp; <em>run</em></h2>
+
+  <div class="code-card">
+    <div class="code-tab">terminal</div>
+    <div class="code-body">
+<code><span class="cmt"># option 1: npm install</span>
+npm install -g @gitlawb/openclaude
+openclaude
+
+<span class="cmt"># option 2: build from source</span>
+git clone https://github.com/friuns2/openclaude-android.git
+cd openclaude-android
+bun install && bun run build
+node dist/cli.mjs
+
+<span class="cmt"># option 3: just download the APK</span>
+<span class="cmt"># → https://friuns2.github.io/openclaude-android/</span></code>
+    </div>
+  </div>
+  <p style="margin-top:1.5rem;color:var(--text-dim);font-size:.9rem">
+    Or <a href="https://github.com/friuns2/openclaude-android/releases/latest/download/app-prod-release.apk">download the latest APK</a> directly,
+    or get it from <a href="https://play.google.com/store/apps/details?id=gptos.intelligence.assistant&hl=en">Google Play</a>.
+    For Termux setup, see <a href="https://github.com/friuns2/openclaude-android/blob/main/ANDROID_INSTALL.md">ANDROID_INSTALL.md</a>.
+  </p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ TECH STACK ═══════════════ -->
+<div class="section">
+  <p class="section-label">Stack</p>
+  <h2>What&rsquo;s <em>inside</em></h2>
+
+  <table class="stack-table">
+    <thead><tr><th>Layer</th><th>Technology</th><th>Details</th></tr></thead>
+    <tbody>
+      <tr><td>🧠 AI Agent</td><td>OpenClaude (Claude Code architecture)</td><td>19 tools, query engine, swarms</td></tr>
+      <tr><td>🦀 Performance</td><td>Rust core (6 crates, 16 modules)</td><td>JSON parser, OAuth, terminal</td></tr>
+      <tr><td>🐍 Orchestration</td><td>Python agent layer</td><td>3.10+</td></tr>
+      <tr><td>⚙️ Runtime</td><td>Bun + Node.js</td><td>1.3+ / 22+</td></tr>
+      <tr><td>🔮 LLM Providers</td><td>Provider-agnostic (10+)</td><td>Claude, OpenAI, Gemini, Ollama&hellip;</td></tr>
+      <tr><td>🔌 Protocol</td><td>MCP (6 transport types)</td><td>Stdio, SSE, HTTP, WS, SDK</td></tr>
+      <tr><td>📱 Android</td><td>Kotlin + WebView</td><td>2.1.0</td></tr>
+      <tr><td>🐧 Linux</td><td>Termux bootstrap (aarch64)</td><td>&mdash;</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════ RELEASE NOTES ═══════════════ -->
+<div class="section" id="release">
+  <p class="section-label">Latest upstream release</p>
+  <!-- RELEASE_START -->
+  <h2><em>Awaiting first release</em></h2>
+  <p class="release-date" style="font-family:var(--mono);font-size:.8rem;color:var(--text-dim);margin-bottom:2rem">Synced from Gitlawb/openclaude</p>
+  <div class="release-body" style="color:var(--text-dim);font-size:.92rem;line-height:1.75;max-width:800px">
+  <p>Release notes will appear here automatically when upstream publishes a release.</p>
+  </div>
+  <!-- RELEASE_END -->
+  <p style="margin-top:2rem">
+    <a href="https://github.com/Gitlawb/openclaude/releases" class="btn btn-ghost" style="display:inline-flex">All Releases</a>
+  </p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="tagline">Claude Code. On a phone. In your pocket.</div>
+  <div class="sub">They leaked the source. We put it on Android.</div>
+  <div class="links">
+    <a href="https://github.com/friuns2/openclaude-android">GitHub</a>
+    <a href="https://github.com/friuns2/openclaude-android/releases/latest/download/app-prod-release.apk">Download</a>
+    <a href="https://play.google.com/store/apps/details?id=gptos.intelligence.assistant&hl=en">Google Play</a>
+    <a href="https://claw-code.codes">Claw Code</a>
+    <a href="https://github.com/Gitlawb/openclaude">OpenClaude</a>
+  </div>
+</footer>
+
+</body>
+</html>

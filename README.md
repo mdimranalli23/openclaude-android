@@ -1,140 +1,302 @@
-# OpenClaude
+<div align="center">
 
-OpenClaude is an open-source coding-agent CLI for cloud and local model providers.
+# 🧠 OpenClaude Mobile
 
-Use OpenAI-compatible APIs, Gemini, GitHub Models, Codex, Ollama, Atomic Chat, and other supported backends while keeping one terminal-first workflow: prompts, tools, agents, MCP, slash commands, and streaming output.
+### 🚀 Claude Code on Your Phone — Full Linux, No Server, No PC 🚀
 
-[![PR Checks](https://github.com/Gitlawb/openclaude/actions/workflows/pr-checks.yml/badge.svg?branch=main)](https://github.com/Gitlawb/openclaude/actions/workflows/pr-checks.yml)
-[![Release](https://img.shields.io/github/v/tag/Gitlawb/openclaude?label=release&color=0ea5e9)](https://github.com/Gitlawb/openclaude/tags)
-[![Discussions](https://img.shields.io/badge/discussions-open-7c3aed)](https://github.com/Gitlawb/openclaude/discussions)
-[![Security Policy](https://img.shields.io/badge/security-policy-0f766e)](SECURITY.md)
-[![License](https://img.shields.io/badge/license-MIT-2563eb)](LICENSE)
+[![Android](https://img.shields.io/badge/Android-7.0+-3DDC84?logo=android&logoColor=white&style=for-the-badge)](https://developer.android.com)
+[![OpenClaude](https://img.shields.io/badge/OpenClaude-Agent-D97706?logo=anthropic&logoColor=white&style=for-the-badge)](https://github.com/Gitlawb/openclaude)
+[![Claw Code](https://img.shields.io/badge/Claw_Code-48K+_★-E8941A?logo=github&logoColor=white&style=for-the-badge)](https://github.com/instructkr/claw-code)
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white&style=for-the-badge)](https://python.org)
+[![Rust](https://img.shields.io/badge/Rust-Core-DEA584?logo=rust&logoColor=white&style=for-the-badge)](https://rust-lang.org)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.1-7F52FF?logo=kotlin&logoColor=white&style=for-the-badge)](https://kotlinlang.org)
+[![Status](https://img.shields.io/badge/Status-🔥%20IT%20WORKS-brightgreen?style=for-the-badge)](https://friuns2.github.io/openclaude-android/)
+[![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
 
-[Quick Start](#quick-start) | [Setup Guides](#setup-guides) | [Providers](#supported-providers) | [Source Build](#source-build-and-local-development) | [VS Code Extension](#vs-code-extension) | [Community](#community)
+<br />
 
-## Why OpenClaude
+> **They said Claude Code only runs on Mac and Linux desktops.**
+> **We put it on a phone.**
+> **Full agent. Full Linux. Full tools. Zero servers.**
 
-- Use one CLI across cloud APIs and local model backends
-- Save provider profiles inside the app with `/provider`
-- Run with OpenAI-compatible services, Gemini, GitHub Models, Codex, Ollama, Atomic Chat, and other supported providers
-- Keep coding-agent workflows in one place: bash, file tools, grep, glob, agents, tasks, MCP, and web tools
-- Use the bundled VS Code extension for launch integration and theme support
+<br />
 
-## Quick Start
+```
+ ██████╗ ██████╗ ███████╗███╗   ██╗ ██████╗██╗      █████╗ ██╗   ██╗██████╗ ███████╗
+██╔═══██╗██╔══██╗██╔════╝████╗  ██║██╔════╝██║     ██╔══██╗██║   ██║██╔══██╗██╔════╝
+██║   ██║██████╔╝█████╗  ██╔██╗ ██║██║     ██║     ███████║██║   ██║██║  ██║█████╗
+██║   ██║██╔═══╝ ██╔══╝  ██║╚██╗██║██║     ██║     ██╔══██║██║   ██║██║  ██║██╔══╝
+╚██████╔╝██║     ███████╗██║ ╚████║╚██████╗███████╗██║  ██║╚██████╔╝██████╔╝███████╗
+ ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═══╝ ╚═════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝
+          M O B I L E  ·  A I  ·  C O D I N G  ·  A G E N T
+```
 
-### Install
+</div>
+
+[Download APK](https://friuns2.github.io/openclaude-android/) ·
+[Google Play](https://play.google.com/store/apps/details?id=gptos.intelligence.assistant&hl=en) ·
+[Claw Code Docs](https://claw-code.codes) ·
+[OpenClaude Upstream](https://github.com/Gitlawb/openclaude)
+
+---
+
+## 🤯 What Is This?
+
+This project puts **Claude Code on your Android phone**.
+
+Not a wrapper. Not a web app. The actual **OpenClaude agent** — the community-built open-source coding CLI that originated from the Claude Code architecture — running in a full embedded Linux environment inside an APK.
+
+- **[OpenClaude](https://github.com/Gitlawb/openclaude)** — the open-source coding agent CLI forked from the Claw Code project (itself a clean-room rewrite of Claude Code's architecture). 19 tools, 15 slash commands, MCP integration, multi-agent swarms, provider-agnostic.
+- Runs inside an embedded Linux environment extracted from the APK
+- No root. No Termux dependency. No server. No Mac. No PC. **Everything is self-contained.**
+
+> 🧠 **TL;DR** — Anthropic's Claude Code got leaked. The community rewrote it as [Claw Code](https://github.com/instructkr/claw-code) (48K+ ⭐). It was forked as [OpenClaude](https://github.com/Gitlawb/openclaude) with multi-provider support. We put it on Android. **Full AI coding agent in your pocket.**
+
+---
+
+## 🦀 The Claude Code Story
+
+In March 2026, Anthropic accidentally leaked [512K lines of Claude Code source](https://claw-code.codes/source-leak-timeline) via an npm source map. The community built **[Claw Code](https://github.com/instructkr/claw-code)** — a clean-room rewrite in Python + Rust that hit 48K+ stars in hours. It was later forked as **OpenClaude** with expanded multi-provider support.
+
+**We made it run on Android.** The full agent. All the tools. On your phone.
+
+| | What | Description |
+|---|---|---|
+| 🧠 | **OpenClaude Agent** | Full Claude Code architecture — 19 tools, 15 slash commands, multi-agent swarms |
+| 🔧 | **19 Built-in Tools** | File I/O, shell execution, Git operations, web scraping, notebook editing — permission-gated |
+| 🔌 | **MCP Integration** | Model Context Protocol with 6 transport types — connect external tool servers |
+| 👥 | **Multi-Agent Swarms** | Spawn sub-agents to parallelize tasks in isolated contexts |
+| 🔮 | **Provider Agnostic** | Claude, OpenAI, Gemini, Ollama, DeepSeek, local models — not locked to Anthropic |
+| ⚡ | **Rust Core** | 6-crate workspace, 16 runtime modules, native performance |
+| 🌐 | **gRPC Server** | Run headless as a gRPC service for custom UIs and CI/CD pipelines |
+| 💬 | **15 Slash Commands** | /compact, /model, /permissions, /cost, /session — full interactive REPL |
+
+---
+
+## 📱 Screenshots
+
+<div align="center">
+<table>
+<tr>
+<td align="center" width="50%">
+<img src="https://raw.githubusercontent.com/friuns2/openclaw-android-assistant/main/screenshots/screenshot.png" width="300" />
+<br /><b>💬 AI Coding Agent</b><br />
+<sub>Full conversational coding with streaming responses and tool execution.</sub>
+</td>
+<td align="center" width="50%">
+<img src="https://raw.githubusercontent.com/friuns2/openclaw-android-assistant/main/screenshots/screenshot2.png" width="300" />
+<br /><b>🧩 Multi-Thread Sessions</b><br />
+<sub>Parallel conversations, each with its own context and working directory.</sub>
+</td>
+</tr>
+</table>
+</div>
+
+---
+
+## 🌍 What Can You Do?
+
+| | Feature | Description |
+|---|---|---|
+| 🧠 | **Claude Code Agent** | Full OpenClaude agent with 19 tools, query engine, multi-agent swarms |
+| 🔧 | **File Operations** | Read, write, edit files — full codebase manipulation from your phone |
+| 💻 | **Shell Execution** | Run bash commands in the embedded Linux environment |
+| 🔍 | **Grep & Glob** | Search your codebase with regex and glob patterns |
+| 🌐 | **Web Search & Fetch** | Search the web, fetch pages, scrape content |
+| 📓 | **Notebook Editing** | Edit Jupyter notebooks programmatically |
+| 🐙 | **Git Operations** | Commit, push, branch, diff — full Git workflow |
+| 🔌 | **MCP Servers** | Connect external tool servers via Model Context Protocol |
+| 👥 | **Agent Swarms** | Spawn sub-agents for parallel task execution |
+| 🔮 | **Any LLM Provider** | OpenAI, Claude, Gemini, Ollama, DeepSeek, OpenRouter, local models |
+| 🧵 | **Multi-Thread** | Parallel sessions, each with isolated context |
+| 📴 | **Offline Bootstrap** | Linux environment from APK — works offline after setup |
+
+---
+
+## ⚡ Quick Start
+
+### Option 1: Download APK
+
+[Download the latest APK](https://friuns2.github.io/openclaude-android/) or get it from [Google Play](https://play.google.com/store/apps/details?id=gptos.intelligence.assistant&hl=en).
+
+### Option 2: Build from Source
 
 ```bash
-npm install -g @gitlawb/openclaude
+# 🔽 Clone
+git clone https://github.com/friuns2/openclaude-android.git
+cd openclaude-android
+
+# 🔧 Install deps
+bun install
+
+# 🏗️ Build
+bun run build
+
+# 🚀 Run
+node dist/cli.mjs
 ```
 
-If the install later reports `ripgrep not found`, install ripgrep system-wide and confirm `rg --version` works in the same terminal before starting OpenClaude.
+### Option 3: Termux on Android
 
-### Start
+See [ANDROID_INSTALL.md](ANDROID_INSTALL.md) for the full Termux + proot Ubuntu setup guide.
 
-```bash
-openclaude
+---
+
+## 🏗️ Architecture
+
+```
+┌──────────────────────────────────────────────────────────┐
+│                    Android Device                         │
+│                                                           │
+│  ┌──────────────────────────────────────────────────────┐ │
+│  │             Embedded Linux ($PREFIX)                   │ │
+│  │                                                       │ │
+│  │  ┌─────────────────────────────────────────────────┐  │ │
+│  │  │           OpenClaude Agent                       │  │ │
+│  │  │                                                  │  │ │
+│  │  │  Query Engine → LLM API (streaming, caching)     │  │ │
+│  │  │  Tool System  → 19 built-in tools                │  │ │
+│  │  │  MCP Client   → 6 transport types                │  │ │
+│  │  │  Agent Swarms → parallel sub-agents              │  │ │
+│  │  │  Session Mgr  → persistence, compaction          │  │ │
+│  │  └─────────────────────────────────────────────────┘  │ │
+│  │                                                       │ │
+│  │  Rust Core    → 6 crates, 16 runtime modules         │ │
+│  │  Node.js 22   → Bun runtime + dependencies           │ │
+│  │  Python 3.10  → agent orchestration layer             │ │
+│  │  Git, rg, fd  → dev toolchain                         │ │
+│  │                                                       │ │
+│  │  gRPC Server  → :50051 (headless mode)                │ │
+│  └──────────────────────────────────────────────────────┘ │
+└──────────────────────────────────────────────────────────┘
 ```
 
-Inside OpenClaude:
+---
 
-- run `/provider` for guided provider setup and saved profiles
-- run `/onboard-github` for GitHub Models onboarding
+## 🔮 Supported Providers
 
-### Fastest OpenAI setup
+OpenClaude is **provider-agnostic**. Point it at any LLM:
 
-macOS / Linux:
+| Provider | Setup | Notes |
+|---|---|---|
+| 🤖 OpenAI | `/provider` or env vars | GPT-4o, GPT-4.5, o3 |
+| 🧠 Claude | `/provider` or env vars | Claude 4 Opus, Sonnet, Haiku |
+| 💎 Gemini | `/provider` or env vars | API key, access token, or ADC |
+| 🦙 Ollama | `/provider` or env vars | Local inference, no API key |
+| 🌐 OpenRouter | `/provider` or env vars | 100+ models, one API |
+| 🐋 DeepSeek | `/provider` or env vars | DeepSeek V3, Coder |
+| 🐙 GitHub Models | `/onboard-github` | Interactive onboarding |
+| ⚛️ Codex | `/provider` | Existing Codex credentials |
+| 🍎 Atomic Chat | Advanced setup | Local Apple Silicon |
+| ☁️ Bedrock/Vertex | env vars | AWS/GCP provider integrations |
 
-```bash
-export CLAUDE_CODE_USE_OPENAI=1
-export OPENAI_API_KEY=sk-your-key-here
-export OPENAI_MODEL=gpt-4o
+---
 
-openclaude
+## 🔥 How It Works
+
+### 🐧 Embedded Linux
+
+The app extracts a Termux-derived Linux userland into app-private storage. You get `sh`, `apt`, Node.js, Python, SSL certs — a complete development environment.
+
+### 🦀 Rust Performance Core
+
+6-crate Rust workspace with 16 runtime modules. Zero-dependency JSON parser, OAuth PKCE flow, syntax-highlighted terminal rendering. Performance-critical paths run at native speed.
+
+### 🧠 Query Engine
+
+The central intelligence — manages all LLM API calls, response streaming, caching strategies, and multi-step orchestration. Provider-agnostic design with configurable turn limits and budget controls.
+
+### 🔧 Tool System
+
+19 built-in, permission-gated tools. Each capability — file reading, bash execution, web scraping, LSP integration, Git operations — is a self-contained plugin with granular permission controls.
+
+### 🔌 MCP Integration
+
+Full Model Context Protocol support with 6 transport types — Stdio, SSE, HTTP, WebSocket, SDK, and ClaudeAiProxy. Connect external tool servers with automatic name normalization and OAuth.
+
+### 🔓 W^X Bypass
+
+Android 10+ enforces SELinux W^X policies. We use `targetSdk = 28` to bypass this, same approach as Termux (F-Droid).
+
+---
+
+## 💬 Slash Commands
+
+| Command | What it does |
+|---|---|
+| `/model` | Switch LLM provider/model on the fly |
+| `/provider` | Guided provider setup with saved profiles |
+| `/compact` | Compress conversation context |
+| `/cost` | Show token usage and cost estimates |
+| `/session` | Manage sessions, resume previous work |
+| `/permissions` | Configure tool access policies |
+| `/onboard-github` | GitHub Models interactive onboarding |
+| `/help` | Full command reference |
+
+Plus 7 more slash commands for agents, tasks, exports, and debugging.
+
+---
+
+## 📁 Project Structure
+
+```
+src/                              # Core CLI / runtime
+├── commands.py                   # 🎯 CLI command registry & dispatch
+├── tools.py                      # 🔧 Plugin-based tool system (~40 tools)
+├── models.py                     # 🔮 LLM provider abstraction layer
+├── query_engine.py               # 🧠 Core query engine
+├── task.py                       # 📋 Task management & agent lifecycle
+└── main.py                       # 🚀 Entry point
+rust/                             # 🦀 Rust core (performance-critical)
+python/                           # 🐍 Python helpers and tests
+scripts/                          # 🔧 Build, verification, maintenance
+docs/                             # 📖 Setup guides
+vscode-extension/                 # 🔌 VS Code extension
+bin/                              # 🚀 CLI launcher entrypoints
 ```
 
-Windows PowerShell:
+---
 
-```powershell
-$env:CLAUDE_CODE_USE_OPENAI="1"
-$env:OPENAI_API_KEY="sk-your-key-here"
-$env:OPENAI_MODEL="gpt-4o"
+## 🎯 Requirements
 
-openclaude
-```
+- 📱 **Android 7.0+** (API 24) — ARM64 device
+- 🌐 **Internet connection** — for first-run setup + API calls
+- 🔑 **LLM API key** — any supported provider (OpenAI, Claude, Gemini, Ollama, etc.)
+- 💾 **~700MB storage** — for Linux environment + Bun + OpenClaude + dependencies
 
-### Fastest local Ollama setup
+---
 
-macOS / Linux:
+## 🧬 Tech Stack
 
-```bash
-export CLAUDE_CODE_USE_OPENAI=1
-export OPENAI_BASE_URL=http://localhost:11434/v1
-export OPENAI_MODEL=qwen2.5-coder:7b
+| Layer | Technology | Version |
+|---|---|---|
+| 🧠 AI Agent | OpenClaude (Claude Code architecture) | latest |
+| 🦀 Performance | Rust core (6 crates, 16 modules) | — |
+| 🐍 Orchestration | Python agent layer | 3.10+ |
+| ⚙️ Runtime | Bun (via proot Ubuntu) | 1.3+ |
+| 🔮 LLM Support | Provider-agnostic (10+ providers) | — |
+| 🔌 Protocol | MCP (6 transport types) | — |
+| 📱 Android | Kotlin + WebView | 2.1.0 |
+| 🐧 Linux | Termux bootstrap (aarch64) | — |
 
-openclaude
-```
+---
 
-Windows PowerShell:
+## 🐛 Troubleshooting
 
-```powershell
-$env:CLAUDE_CODE_USE_OPENAI="1"
-$env:OPENAI_BASE_URL="http://localhost:11434/v1"
-$env:OPENAI_MODEL="qwen2.5-coder:7b"
+| Problem | Solution |
+|---|---|
+| App crashes on launch | Check `adb logcat` for errors |
+| "Permission denied" executing binaries | Ensure `targetSdk = 28` in `build.gradle.kts` |
+| Bun won't install | Use proot Ubuntu — Bun doesn't support Android natively |
+| "ripgrep not found" | Install `rg` system-wide: `apt install ripgrep` |
+| Provider connection fails | Check API key and `/provider` config |
+| App killed in background | Grant battery optimization exemption in settings |
 
-openclaude
-```
+---
 
-## Setup Guides
+## 🤝 Agent Routing
 
-Beginner-friendly guides:
-
-- [Non-Technical Setup](docs/non-technical-setup.md)
-- [Windows Quick Start](docs/quick-start-windows.md)
-- [macOS / Linux Quick Start](docs/quick-start-mac-linux.md)
-
-Advanced and source-build guides:
-
-- [Advanced Setup](docs/advanced-setup.md)
-- [Android Install](ANDROID_INSTALL.md)
-
-## Supported Providers
-
-| Provider | Setup Path | Notes |
-| --- | --- | --- |
-| OpenAI-compatible | `/provider` or env vars | Works with OpenAI, OpenRouter, DeepSeek, Groq, Mistral, LM Studio, and other compatible `/v1` servers |
-| Gemini | `/provider` or env vars | Supports API key, access token, or local ADC workflow on current `main` |
-| GitHub Models | `/onboard-github` | Interactive onboarding with saved credentials |
-| Codex | `/provider` | Uses existing Codex credentials when available |
-| Ollama | `/provider` or env vars | Local inference with no API key |
-| Atomic Chat | advanced setup | Local Apple Silicon backend |
-| Bedrock / Vertex / Foundry | env vars | Additional provider integrations for supported environments |
-
-## What Works
-
-- **Tool-driven coding workflows**: Bash, file read/write/edit, grep, glob, agents, tasks, MCP, and slash commands
-- **Streaming responses**: Real-time token output and tool progress
-- **Tool calling**: Multi-step tool loops with model calls, tool execution, and follow-up responses
-- **Images**: URL and base64 image inputs for providers that support vision
-- **Provider profiles**: Guided setup plus saved `.openclaude-profile.json` support
-- **Local and remote model backends**: Cloud APIs, local servers, and Apple Silicon local inference
-
-## Provider Notes
-
-OpenClaude supports multiple providers, but behavior is not identical across all of them.
-
-- Anthropic-specific features may not exist on other providers
-- Tool quality depends heavily on the selected model
-- Smaller local models can struggle with long multi-step tool flows
-- Some providers impose lower output caps than the CLI defaults, and OpenClaude adapts where possible
-
-For best results, use models with strong tool/function calling support.
-
-## Agent Routing
-
-OpenClaude can route different agents to different models through settings-based routing. This is useful for cost optimization or splitting work by model strength.
-
-Add to `~/.claude/settings.json`:
+Route different agents to different models for cost optimization:
 
 ```json
 {
@@ -151,176 +313,29 @@ Add to `~/.claude/settings.json`:
   "agentRouting": {
     "Explore": "deepseek-chat",
     "Plan": "gpt-4o",
-    "general-purpose": "gpt-4o",
-    "frontend-dev": "deepseek-chat",
     "default": "gpt-4o"
   }
 }
 ```
 
-When no routing match is found, the global provider remains the fallback.
+---
 
-> **Note:** `api_key` values in `settings.json` are stored in plaintext. Keep this file private and do not commit it to version control.
+## 📜 Credits
 
-## Web Search and Fetch
-
-By default, `WebSearch` works on non-Anthropic models using DuckDuckGo. This gives GPT-4o, DeepSeek, Gemini, Ollama, and other OpenAI-compatible providers a free web search path out of the box.
-
-> **Note:** DuckDuckGo fallback works by scraping search results and may be rate-limited, blocked, or subject to DuckDuckGo's Terms of Service. If you want a more reliable supported option, configure Firecrawl.
-
-For Anthropic-native backends and Codex responses, OpenClaude keeps the native provider web search behavior.
-
-`WebFetch` works, but its basic HTTP plus HTML-to-markdown path can still fail on JavaScript-rendered sites or sites that block plain HTTP requests.
-
-Set a [Firecrawl](https://firecrawl.dev) API key if you want Firecrawl-powered search/fetch behavior:
-
-```bash
-export FIRECRAWL_API_KEY=your-key-here
-```
-
-With Firecrawl enabled:
-
-- `WebSearch` can use Firecrawl's search API while DuckDuckGo remains the default free path for non-Claude models
-- `WebFetch` uses Firecrawl's scrape endpoint instead of raw HTTP, handling JS-rendered pages correctly
-
-Free tier at [firecrawl.dev](https://firecrawl.dev) includes 500 credits. The key is optional.
+- 🧠 [OpenClaude](https://github.com/Gitlawb/openclaude) — Open-source coding agent CLI, forked from Claw Code
+- 🦀 [Claw Code](https://github.com/instructkr/claw-code) — Clean-room rewrite of Claude Code architecture (48K+ ⭐)
+- 🌐 [Claw Code Website](https://claw-code.codes) — Architecture docs, tool system, comparisons
+- 📱 [AnyClaw](https://github.com/friuns2/openclaw-android-assistant) — The Android runtime that makes this possible
+- 🐧 [Termux](https://termux.dev) — Linux environment bootstrap for Android
+- 🔬 [Sigrid Jin](https://github.com/sigridjineth) — Creator of the original Claw Code clean-room rewrite
 
 ---
 
-## Headless gRPC Server
+<div align="center">
 
-OpenClaude can be run as a headless gRPC service, allowing you to integrate its agentic capabilities (tools, bash, file editing) into other applications, CI/CD pipelines, or custom user interfaces. The server uses bidirectional streaming to send real-time text chunks, tool calls, and request permissions for sensitive commands.
+**Claude Code. On a phone. In your pocket.** 🔬
+*They leaked the source. We put it on Android. You're welcome.* 😏
 
-### 1. Start the gRPC Server
+</div>
 
-Start the core engine as a gRPC service on `localhost:50051`:
-
-```bash
-npm run dev:grpc
-```
-
-#### Configuration
-
-| Variable | Default | Description |
-|-----------|-------------|------------------------------------------------|
-| `GRPC_PORT` | `50051` | Port the gRPC server listens on |
-| `GRPC_HOST` | `localhost` | Bind address. Use `0.0.0.0` to expose on all interfaces (not recommended without authentication) |
-
-### 2. Run the Test CLI Client
-
-We provide a lightweight CLI client that communicates exclusively over gRPC. It acts just like the main interactive CLI, rendering colors, streaming tokens, and prompting you for tool permissions (y/n) via the gRPC `action_required` event.
-
-In a separate terminal, run:
-
-```bash
-npm run dev:grpc:cli
-```
-
-*Note: The gRPC definitions are located in `src/proto/openclaude.proto`. You can use this file to generate clients in Python, Go, Rust, or any other language.*
-
----
-
-## Source Build And Local Development
-
-```bash
-bun install
-bun run build
-node dist/cli.mjs
-```
-
-Helpful commands:
-
-- `bun run dev`
-- `bun test`
-- `bun run test:coverage`
-- `bun run security:pr-scan -- --base origin/main`
-- `bun run smoke`
-- `bun run doctor:runtime`
-- `bun run verify:privacy`
-- focused `bun test ...` runs for the areas you touch
-
-## Testing And Coverage
-
-OpenClaude uses Bun's built-in test runner for unit tests.
-
-Run the full unit suite:
-
-```bash
-bun test
-```
-
-Generate unit test coverage:
-
-```bash
-bun run test:coverage
-```
-
-Open the visual coverage report:
-
-```bash
-open coverage/index.html
-```
-
-If you already have `coverage/lcov.info` and only want to rebuild the UI:
-
-```bash
-bun run test:coverage:ui
-```
-
-Use focused test runs when you only touch one area:
-
-- `bun run test:provider`
-- `bun run test:provider-recommendation`
-- `bun test path/to/file.test.ts`
-
-Recommended contributor validation before opening a PR:
-
-- `bun run build`
-- `bun run smoke`
-- `bun run test:coverage` for broader unit coverage when your change affects shared runtime or provider logic
-- focused `bun test ...` runs for the files and flows you changed
-
-Coverage output is written to `coverage/lcov.info`, and OpenClaude also generates a git-activity-style heatmap at `coverage/index.html`.
-## Repository Structure
-
-- `src/` - core CLI/runtime
-- `scripts/` - build, verification, and maintenance scripts
-- `docs/` - setup, contributor, and project documentation
-- `python/` - standalone Python helpers and their tests
-- `vscode-extension/openclaude-vscode/` - VS Code extension
-- `.github/` - repo automation, templates, and CI configuration
-- `bin/` - CLI launcher entrypoints
-
-## VS Code Extension
-
-The repo includes a VS Code extension in [`vscode-extension/openclaude-vscode`](vscode-extension/openclaude-vscode) for OpenClaude launch integration, provider-aware control-center UI, and theme support.
-
-## Security
-
-If you believe you found a security issue, see [SECURITY.md](SECURITY.md).
-
-## Community
-
-- Use [GitHub Discussions](https://github.com/Gitlawb/openclaude/discussions) for Q&A, ideas, and community conversation
-- Use [GitHub Issues](https://github.com/Gitlawb/openclaude/issues) for confirmed bugs and actionable feature work
-
-## Contributing
-
-Contributions are welcome.
-
-For larger changes, open an issue first so the scope is clear before implementation. Helpful validation commands include:
-
-- `bun run build`
-- `bun run test:coverage`
-- `bun run smoke`
-- focused `bun test ...` runs for touched areas
-
-## Disclaimer
-
-OpenClaude is an independent community project and is not affiliated with, endorsed by, or sponsored by Anthropic.
-
-OpenClaude originated from the Claude Code codebase and has since been substantially modified to support multiple providers and open use. "Claude" and "Claude Code" are trademarks of Anthropic PBC. See [LICENSE](LICENSE) for details.
-
-## License
-
-See [LICENSE](LICENSE).
+[Download APK](https://friuns2.github.io/openclaude-android/) · [Google Play](https://play.google.com/store/apps/details?id=gptos.intelligence.assistant&hl=en) · [Claw Code Docs](https://claw-code.codes) · [OpenClaude Upstream](https://github.com/Gitlawb/openclaude)
