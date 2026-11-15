@@ -1,0 +1,18 @@
+{
+  "name": "Little Village Tales",
+  "handle": "@little_villagetales",
+  "url": "https://youtube.com/@little_villagetales",
+  "referenceVideos": [
+    "https://youtube.com/watch?v=FlU0Vd8wYR0"
+  ],
+  "uploadDefaults": {
+    "privacyStatus": "private",
+    "language": "bn",
+    "aspectRatio": "9:16"
+  },
+  "tts": {
+    "provider": "elevenlabs",
+    "voiceId": "yBaXvGi8AgNwOlM8apDk",
+    "language": "bn"
+  }
+}

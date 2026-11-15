@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#101827" />
+    <title>OpenClaude Shorts</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header>
+        <div class="eyebrow">OPENCLAUDE SHORTS</div>
+        <h1>ভিডিও বানান</h1>
+        <p class="muted">নিজের বা royalty-free ভিডিও দিয়ে নিরাপদ Shorts তৈরি করুন।</p>
+      </header>
+
+      <section class="card">
+        <label for="video">ভিডিও বাছাই করুন</label>
+        <input id="video" type="file" accept="video/*" />
+        <div id="videoName" class="file-name">কোনো ভিডিও বাছাই করা হয়নি</div>
+      </section>
+
+      <section class="card">
+        <label for="script">বাংলা narration</label>
+        <textarea id="script" rows="5" placeholder="আপনার গল্প এখানে লিখুন..."></textarea>
+        <button id="voice" class="secondary">বাংলা voice তৈরি করুন</button>
+        <div id="voiceStatus" class="status">Voice এখনো তৈরি হয়নি</div>
+      </section>
+
+      <button id="render" class="primary">Shorts তৈরি করুন</button>
+      <div id="status" class="status" role="status">প্রস্তুত</div>
+      <p class="notice">Copyright claim এড়াতে কেবল নিজের, licensed বা royalty-free media ব্যবহার করুন।</p>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

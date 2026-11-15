@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">OpenClaude Shorts</string>
+    <string name="title_activity_main">OpenClaude Shorts</string>
+    <string name="package_name">com.mdimranali.openclaude.shorts</string>
+    <string name="custom_url_scheme">com.mdimranali.openclaude.shorts</string>
+</resources>
